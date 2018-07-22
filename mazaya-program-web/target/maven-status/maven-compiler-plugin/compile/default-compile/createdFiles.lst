@@ -1,0 +1,3 @@
+org\bh\housing\mazaya\config\DatabaseConfig.class
+org\bh\housing\mazaya\HousingMazayaApplication.class
+org\bh\housing\mazaya\web\managedbean\HelloWorld.class

@@ -1,0 +1,11 @@
+org\bh\housing\mazaya\domain\Status.class
+org\bh\housing\mazaya\repo\generic\LookupRepository.class
+org\bh\housing\mazaya\domain\BasicLookup.class
+org\bh\housing\mazaya\repo\generic\HMBaseRepository.class
+org\bh\housing\mazaya\domain\Request.class
+org\bh\housing\mazaya\repo\lookup\StatusRepository.class
+org\bh\housing\mazaya\repo\RequestRepository.class
+org\bh\housing\mazaya\domain\Category.class
+org\bh\housing\mazaya\repo\lookup\CategoryRepository.class
+org\bh\housing\mazaya\repo\generic\HMBaseRepositoryImpl.class
+org\bh\housing\mazaya\repo\util\GenericUtil.class
