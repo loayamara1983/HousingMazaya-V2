@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 
 import org.bh.housing.mazaya.domain.Request;
-import org.bh.housing.mazaya.repo.RequestRepository;
+import org.bh.housing.mazaya.repository.RequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

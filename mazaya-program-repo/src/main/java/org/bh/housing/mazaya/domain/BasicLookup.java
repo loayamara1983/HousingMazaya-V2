@@ -28,6 +28,9 @@ public class BasicLookup implements Serializable{
 	private String name;
 	
 	@Column
+	private String displayName;
+	
+	@Column
 	private String description;
 	
 	@Column
