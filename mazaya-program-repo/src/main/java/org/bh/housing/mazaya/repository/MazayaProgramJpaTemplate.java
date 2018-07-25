@@ -11,11 +11,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
 /**
  * 
@@ -34,20 +34,19 @@ public class MazayaProgramJpaTemplate<T> {
 	 * @param entityManager
 	 * @param entityClass
 	 */
-	public MazayaProgramJpaTemplate(EntityManager entityManager,
-			Class<T> entityClass) {
-		
+	public MazayaProgramJpaTemplate(EntityManager entityManager, Class<T> entityClass) {
+
 		super();
 		this.entityManager = entityManager;
 		this.entityClass = entityClass;
 	}
-	
+
 	/**
 	 * 
 	 * @param params
 	 * @return
 	 */
-	public List<T> findAll(Map<String, Object> params){
+	public List<T> findAll(Map<String, Object> params) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.entityClass);
 
@@ -58,7 +57,7 @@ public class MazayaProgramJpaTemplate<T> {
 		TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @param params
@@ -66,7 +65,7 @@ public class MazayaProgramJpaTemplate<T> {
 	 * @param pageable
 	 * @return
 	 */
-	public List<T> findAll(Map<String, Object> params, Sort sort, Pageable pageable){
+	public List<T> findAll(Map<String, Object> params, Sort sort, Pageable pageable) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(this.entityClass);
 
@@ -81,5 +80,23 @@ public class MazayaProgramJpaTemplate<T> {
 		applyQueryPagination(pageable, query);
 
 		return query.getResultList();
+	}
+
+	/**
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public long count(Map<String, Object> params) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Long> countCriteria = criteriaBuilder.createQuery(Long.class);
+		Root<T> countRoot = countCriteria.from(this.entityClass);
+
+		Expression<Long> countQuery = criteriaBuilder.count(countRoot);
+		CriteriaQuery<Long> criteriaQuery = countCriteria.select(countQuery);
+
+		applySearchFilter(params, criteriaBuilder, criteriaQuery, countRoot);
+
+		return this.entityManager.createQuery(criteriaQuery).getSingleResult();
 	}
 }

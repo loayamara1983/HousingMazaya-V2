@@ -49,4 +49,9 @@ public class MazayaProgramRepositoryImpl<T, ID extends Serializable> extends Sim
 	public List<T> findAll(Map<String, Object> params, Sort sort, Pageable pageable) {
 		return this.jpaTemplate.findAll(params, sort, pageable);
 	}
+
+	@Override
+	public long count(Map<String, Object> params) {
+		return this.jpaTemplate.count(params);
+	}
 }

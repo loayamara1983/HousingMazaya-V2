@@ -22,4 +22,5 @@ public interface MazayaProgramRepository<T, ID extends Serializable>
 	
 	List<T> findAll(Map<String, Object> params, Sort sort, Pageable pageable);
 	
+	long count(Map<String, Object> params);
 }

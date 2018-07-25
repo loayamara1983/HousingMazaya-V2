@@ -1,10 +1,14 @@
 package org.bh.housing.mazaya.repository;
 
+import static org.springframework.data.jpa.repository.query.QueryUtils.COUNT_QUERY_STRING;
+import static org.springframework.data.jpa.repository.query.QueryUtils.getQueryString;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,6 +18,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.provider.PersistenceProvider;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -24,7 +29,7 @@ import org.springframework.util.CollectionUtils;
 public class QueryFilterSupport {
 
 	public static <T> void applySearchFilter(Map<String, Object> params, CriteriaBuilder criteriaBuilder,
-			CriteriaQuery<T> criteriaQuery, Root<T> from) {
+			CriteriaQuery<?> criteriaQuery, Root<T> from) {
 
 		if (CollectionUtils.isEmpty(params)) {
 			return;
